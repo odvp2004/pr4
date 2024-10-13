@@ -2,28 +2,29 @@ package pr4.cambiosImagen;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import pr4.cambiosImagen.modeloLista.Lista;
+import pr4.cambiosImagen.modeloLista.Pila;
 
-public class HistorialCambios extends Lista {
-
+public class HistorialCambios{
+    private Pila<ChangeMatrizCommand> undoStack = new Pila<>();
     private static final Logger logger = LogManager.getRootLogger();
 
-    public void push(int[][] nuevaMatriz){
-        logger.info("Se ha guardado el cambio en el historial de pixeles");
-        insertar(nuevaMatriz);
+    public void ejecutarComando(ChangeMatrizCommand comando){
+        comando.execute();
+        undoStack.push(comando);
+        logger.info("Se ha guardado el cambio realizado en al imagen");
     }
+    public void undo(){
 
-    public int[][] pop(){
-        int[][] ultimaMatriz = (int[][]) obtener(0);
-        if(tam >1){
-            logger.info("Se ha extraido el cambio del historial de pixeles");
-            eliminar(0);
+        if(!undoStack.isEmpty()){
+
+            ICommandImagen comando = undoStack.pop();
+            logger.info("Se ha revertido el cambio realizado en la imagen");
+            comando.undo();
         }
-        return ultimaMatriz;
-    }
+        else{
+            logger.info("No hay cambios para deshacer en la imagen");
+        }
 
-    public boolean isEmpty(){
-        return tam==0;
     }
 
 

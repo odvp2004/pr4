@@ -1,9 +1,5 @@
 package pr4.cambiosImagen.modeloLista;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.util.Iterator;
-
 public class Lista<E>{
     protected Nodo<E> raiz;
     protected int tam = 0;

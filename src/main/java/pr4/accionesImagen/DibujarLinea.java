@@ -1,5 +1,7 @@
 package pr4.accionesImagen;
 
+import pr4.cambiosImagen.ChangeMatrizCommand;
+import pr4.cambiosImagen.HistorialCambios;
 import pr4.modelo.Pizarron;
 
 import java.awt.*;
@@ -42,9 +44,7 @@ public class DibujarLinea {
             }
         }
         if (modelo.getHerramientaSeleccionada().equals(Pizarron.HERRAMIENTA_LINEA)) {
-            modelo.getImagen().getHistorialCambios().push(modelo.getImagen().getPixeles());
+            modelo.getHistorial().ejecutarComando(new ChangeMatrizCommand(modelo, pixeles));
         }
-        modelo.getImagen().setPixeles(pixeles);
-
     }
 }

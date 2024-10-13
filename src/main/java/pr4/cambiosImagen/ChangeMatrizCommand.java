@@ -2,20 +2,24 @@ package pr4.cambiosImagen;
 
 import pr4.modelo.Pizarron;
 
-public class Undo implements ICommandImagen {
+public class ChangeMatrizCommand implements ICommandImagen {
 
     private Pizarron modelo;
-    private HistorialCambios historialCambios;
+    private int[][] oldValue;
+    private int[][] newValue;
 
-    public Undo(Pizarron modelo){
+    public ChangeMatrizCommand(Pizarron modelo, int[][] pixeles){
         this.modelo = modelo;
-        this.historialCambios = modelo.getImagen().getHistorialCambios();
+        this.oldValue = modelo.getImagen().getPixeles();
+        this.newValue = pixeles;
     }
     @Override
     public void execute() {
-        if(!historialCambios.isEmpty()){
-            modelo.getImagen().setPixeles(historialCambios.pop());
-        }
+        modelo.getImagen().setPixeles(newValue);
+    }
 
+    @Override
+    public void undo() {
+        modelo.getImagen().setPixeles(oldValue);
     }
 }

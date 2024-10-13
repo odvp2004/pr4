@@ -1,8 +1,8 @@
 package pr4.vista;
 
-import pr4.cambiosImagen.ControladorCambiosImagen;
+import pr4.cambiosImagen.HistorialCambios;
 import pr4.cambiosImagen.ICommandImagen;
-import pr4.cambiosImagen.Undo;
+import pr4.cambiosImagen.ChangeMatrizCommand;
 import pr4.excepciones.ManejoDeImagenException;
 import pr4.manejoDeImagen.AbrirImagen;
 import pr4.manejoDeImagen.GuardarImagen;
@@ -25,14 +25,11 @@ public class ImagenFrame extends JFrame {
     private JMenuItem nuevoItem, guardarItem, salirItem, undoItem;
     private JMenuBar jMenubar;
     private static final Logger logger = LogManager.getRootLogger();
-    private ControladorCambiosImagen controladorImagen;
 
 
     public ImagenFrame() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setMinimumSize(new Dimension(400, 480));
-        this.controladorImagen = new ControladorCambiosImagen();
-
         init();
     }
 
@@ -58,10 +55,14 @@ public class ImagenFrame extends JFrame {
             System.exit(0);
         });
 
-        nuevoItem.addActionListener(e -> manejarImagen(new AbrirImagen()));
+        nuevoItem.addActionListener(e -> {
+            manejarImagen(new AbrirImagen());
+            modelo.reiniciarHistorial();
+        });
+
         guardarItem.addActionListener(e -> manejarImagen(new GuardarImagen()));
 
-        undoItem.addActionListener(e -> executeEditCommand(new Undo(modelo)));
+        undoItem.addActionListener(e -> modelo.getHistorial().undo());
 
         jMenuArchivo = new JMenu("Archivo");
         jMenuArchivo.add(nuevoItem);
@@ -93,10 +94,5 @@ public class ImagenFrame extends JFrame {
 
     }
 
-    private void executeEditCommand(ICommandImagen cambioImagen) {
-        controladorImagen.setCambioCommand(cambioImagen);
-        controladorImagen.execute();
-        logger.info("Se ha ejecutado el comando");
-    }
 
 }

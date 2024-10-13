@@ -17,12 +17,11 @@ public class Imagen {
     private int[][] pixeles;
     private int width;
     private int height;
-    private HistorialCambios historialCambios;
     private PropertyChangeSupport supportObserver;
 
     public Imagen() {
         pixeles = new int[][]{};
-        historialCambios = new HistorialCambios();
+
         supportObserver = new PropertyChangeSupport(this);
 
     }
@@ -78,11 +77,4 @@ public class Imagen {
         return img;
     }
 
-    public void setHistorialCambios(HistorialCambios historialCambios) {
-        this.historialCambios = historialCambios;
-    }
-
-    public HistorialCambios getHistorialCambios() {
-        return historialCambios;
-    }
 }

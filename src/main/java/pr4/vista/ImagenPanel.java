@@ -1,6 +1,7 @@
 package pr4.vista;
 
 import pr4.accionesImagen.*;
+import pr4.cambiosImagen.HistorialCambios;
 import pr4.modelo.Imagen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,7 +31,6 @@ public class ImagenPanel extends JPanel implements MouseListener, MouseMotionLis
         this.modelo.getImagen().addObserver(this);
         this.modelo.addObserver(this);
         this.rightpanel = rightPanel;
-
         figuraEnCurso = false;
 
         puntoInicial = new Point();

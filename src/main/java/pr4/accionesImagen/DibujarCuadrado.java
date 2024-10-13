@@ -1,5 +1,7 @@
 package pr4.accionesImagen;
 
+import pr4.cambiosImagen.ChangeMatrizCommand;
+import pr4.cambiosImagen.HistorialCambios;
 import pr4.modelo.Pizarron;
 
 import java.awt.*;
@@ -21,8 +23,7 @@ public class DibujarCuadrado {
             pixeles[puntoInicial.y + alto][x] = modelo.getColorActual();
         }
 
-        modelo.getImagen().getHistorialCambios().push(modelo.getImagen().getPixeles());
-        modelo.getImagen().setPixeles(pixeles);
+        modelo.getHistorial().ejecutarComando(new ChangeMatrizCommand(modelo, pixeles));
 
 
     }

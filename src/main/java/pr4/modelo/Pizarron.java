@@ -2,6 +2,7 @@ package pr4.modelo;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import pr4.cambiosImagen.HistorialCambios;
 
 import java.awt.*;
 import java.beans.PropertyChangeListener;
@@ -12,19 +13,21 @@ public class Pizarron {
     private int colorActual;
     private String herramientaSeleccionada;
     private int rango;
-
+    private HistorialCambios historialCambios;
     public static final String HERRAMIENTA_CUBETA = "CUBETA";
     public static final String HERRAMIENTA_PINCEL = "PINCEL";
     public static final String HERRAMIENTA_LINEA = "LINEA";
     public static final String HERRAMIENTA_RECTANGULO = "RECTANGULO";
-
-    private static final Logger logger = LogManager.getRootLogger();
-    private PropertyChangeSupport supportObserver;
     private final String OBSERVER_COLOR = "OBSERVABLE_COLOR";
     private final String OBSERVER_RANGO = "OBSERVABLE_RANGO";
 
+    private static final Logger logger = LogManager.getRootLogger();
+    private PropertyChangeSupport supportObserver;
+
+
 
     public Pizarron(Imagen imagen){
+        this.historialCambios = new HistorialCambios();
         this.imagen = imagen;
         this.colorActual = Color.WHITE.getRGB();
         this.rango = 10;
@@ -48,6 +51,14 @@ public class Pizarron {
         this.colorActual = colorActual;
         supportObserver.firePropertyChange(OBSERVER_COLOR, oldColor, colorActual);
         logger.info("Se cambió el color");
+    }
+
+    public HistorialCambios getHistorial() {
+        return historialCambios;
+    }
+
+    public void reiniciarHistorial(){
+        historialCambios = new HistorialCambios();
     }
 
     public String getHerramientaSeleccionada() {

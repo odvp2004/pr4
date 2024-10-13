@@ -1,7 +1,6 @@
 import org.junit.Test;
 import pr4.accionesImagen.DibujarLinea;
-import pr4.cambiosImagen.ControladorCambiosImagen;
-import pr4.cambiosImagen.Undo;
+import pr4.cambiosImagen.ChangeMatrizCommand;
 import pr4.modelo.Imagen;
 import pr4.modelo.Pizarron;
 
@@ -43,12 +42,7 @@ public class CambiosImagenTest {
                 {0, 0, 0, 0, 0}
         };
 
-        ControladorCambiosImagen cci = new ControladorCambiosImagen();
-        cci.setCambioCommand(new Undo(modelo));
-        cci.execute();
-
         //Asert
-
         assertArrayEquals(pixeles1, modelo.getImagen().getPixeles());
 
     }
