@@ -46,5 +46,6 @@ public class DibujarLinea {
         if (modelo.getHerramientaSeleccionada().equals(Pizarron.HERRAMIENTA_LINEA)) {
             modelo.getHistorial().ejecutarComando(new ChangeMatrizCommand(modelo, pixeles));
         }
+        modelo.getImagen().setPixeles(pixeles);
     }
 }

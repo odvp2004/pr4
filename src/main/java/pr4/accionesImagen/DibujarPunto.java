@@ -15,6 +15,11 @@ public class DibujarPunto {
         }
 
         pixeles[punto.y][punto.x] = modelo.getColorActual();
+        int[][] oldValue = modelo.getHistorial().obtenerUltimoValor();
+        if(oldValue == null){
+            oldValue = modelo.getImagen().getImagenInicial();
+        }
+        modelo.getImagen().setPixeles(oldValue);
         modelo.getHistorial().ejecutarComando(new ChangeMatrizCommand(modelo, pixeles));
     }
 

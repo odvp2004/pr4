@@ -24,6 +24,7 @@ public class ImagenPanel extends JPanel implements MouseListener, MouseMotionLis
     private boolean figuraEnCurso;
     private static final Logger logger = LogManager.getRootLogger();
 
+
     public ImagenPanel(Pizarron modelo, RightPanel rightPanel) {
         this.addMouseListener(this);
         this.addMouseMotionListener(this);

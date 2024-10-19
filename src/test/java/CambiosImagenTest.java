@@ -41,7 +41,7 @@ public class CambiosImagenTest {
                 {1, 1, 0, 0, 0},
                 {0, 0, 0, 0, 0}
         };
-
+        modelo.getHistorial().undo();
         //Asert
         assertArrayEquals(pixeles1, modelo.getImagen().getPixeles());
 

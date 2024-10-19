@@ -26,6 +26,12 @@ public class HistorialCambios{
         }
 
     }
+    public int[][] obtenerUltimoValor(){
+        if(undoStack.getTam() == 0){
+            return null;
+        }
+        return undoStack.obtener(0).getLastValue();
+    }
 
 
 

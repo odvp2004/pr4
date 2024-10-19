@@ -22,4 +22,8 @@ public class ChangeMatrizCommand implements ICommandImagen {
     public void undo() {
         modelo.getImagen().setPixeles(oldValue);
     }
+
+    public int[][] getLastValue(){
+        return newValue;
+    }
 }

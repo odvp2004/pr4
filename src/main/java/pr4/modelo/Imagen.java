@@ -18,6 +18,7 @@ public class Imagen {
     private int width;
     private int height;
     private PropertyChangeSupport supportObserver;
+    private int[][] imagenInicial;
 
     public Imagen() {
         pixeles = new int[][]{};
@@ -50,6 +51,14 @@ public class Imagen {
         Image img = createImageFromMatrix(pixeles, width, height);
         g.drawImage(img, 0,0, null);
         logger.debug("Se han pintado los pixeles en el panel principal");
+    }
+
+    public void setImagenInicial(int[][] imagenInicial) {
+        this.imagenInicial = imagenInicial;
+    }
+
+    public int[][] getImagenInicial() {
+        return imagenInicial;
     }
 
     public int getWidth() {

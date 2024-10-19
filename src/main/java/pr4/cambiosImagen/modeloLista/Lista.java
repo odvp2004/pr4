@@ -43,6 +43,9 @@ public class Lista<E>{
     }
 
     public E obtener(int posicion) {
+        if(posicion>= tam){
+            return null;
+        }
         return getNodo(posicion).getValor();
     }
 
